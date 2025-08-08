@@ -1,0 +1,46 @@
+
+:root{ --wine:#6E1E2D; --terracotta:#C85A2E; --mustard:#D4A373; --cream:#F7F1E5; --ink:#2B2B2B;}
+*{box-sizing:border-box} html,body{margin:0;padding:0}
+body{font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; color: var(--ink); background: var(--cream); min-height:100vh; position:relative;}
+/* Marca de agua en todo el sitio */
+header{ position:sticky; top:0; z-index:10; background: linear-gradient(90deg, var(--terracotta), var(--wine)); box-shadow:0 2px 8px rgba(0,0,0,.15); }
+.navbar{ max-width:1200px; margin:0 auto; padding:.75rem 1rem; display:flex; align-items:center; justify-content:space-between; }
+.brand{ color:#fff; font-weight:700; text-transform:uppercase; letter-spacing:.5px }
+.navbar ul{ list-style:none; margin:0; padding:0; display:flex; gap:1rem }
+.navbar a{ color:#fff; text-decoration:none; padding:.5rem .75rem; border-radius:.5rem }
+.navbar a:hover{ background:rgba(255,255,255,.15) }
+/* Contenido */
+main{ position:relative; z-index:1; max-width:1200px; margin:1.5rem auto; padding:0 1rem }
+.section{ background:#fff; border-radius:1rem; padding:1rem; box-shadow:0 6px 16px rgba(0,0,0,.08); margin:1.25rem 0 }
+/* Hero predominante */
+.hero{ position:relative; border-radius:1rem; overflow:hidden; box-shadow:0 10px 30px rgba(0,0,0,.2) }
+.hero img{ width:100%; height:clamp(260px,55vw,520px); object-fit:cover; display:block }
+.hero .overlay{ position:absolute; inset:0; background:linear-gradient(0deg, rgba(0,0,0,.45), rgba(0,0,0,.05) 50%); display:flex; align-items:flex-end; padding:1.25rem }
+.hero h1{ color:#fff; margin:0; font-size:clamp(1.6rem,3vw,2.4rem) }
+/* Grilla dos columnas (Nosotros) */
+.grid-two{ display:grid; grid-template-columns:1fr 1fr; gap:1rem }
+.grid-two img{ width:100%; border-radius:.75rem; object-fit:cover }
+/* Contacto + WhatsApp */
+.contact-card label{ display:block; font-weight:600; margin-top:.75rem }
+.contact-card input, .contact-card textarea, .contact-card select{ width:100%; padding:.6rem .7rem; border:1px solid #ddd; border-radius:.5rem; background:#fff }
+.contact-card button{ margin-top:1rem; background:var(--terracotta); color:#fff; border:0; padding:.7rem 1rem; border-radius:.6rem; cursor:pointer }
+.contact-card button:hover{ background:#b14f28 }
+.contact-ways{ display:flex; gap:1rem; align-items:center; margin-top:.75rem }
+.contact-ways img{ width:28px; height:28px }
+.contact-ways a{ color:var(--wine); text-decoration:none }
+/* Carrusel */
+.carousel{ position:relative; overflow:hidden; border-radius:1rem; box-shadow:0 8px 20px rgba(0,0,0,.15) }
+.carousel-track{ display:flex; transition:transform .45s ease }
+.carousel-slide{ min-width:100%; user-select:none }
+.carousel-slide img{ width:100%; height:clamp(240px,50vw,520px); object-fit:cover; display:block }
+.carousel button{ position:absolute; top:50%; transform:translateY(-50%); background:rgba(0,0,0,.45); color:#fff; border:0; width:42px; height:42px; border-radius:50%; cursor:pointer }
+.carousel .prev{ left:.5rem } .carousel .next{ right:.5rem }
+.carousel button:hover{ background:rgba(0,0,0,.65) }
+/* Footer con redes */
+footer{ margin-top:2rem; background:#1f1f1f; color:#ddd; position:relative; z-index:1 }
+.footer-inner{ max-width:1200px; margin:0 auto; padding:1rem; display:flex; align-items:center; justify-content:space-between }
+.social a{ display:inline-flex; align-items:center; justify-content:center; width:34px; height:34px; margin-left:.5rem }
+.social img{ width:64px; height:64px }
+small{ color:#aaa }
+/* Responsive */
+@media (max-width:800px){ .grid-two{ grid-template-columns:1fr } .navbar ul{ flex-wrap:wrap; gap:.5rem } }

@@ -1,0 +1,73 @@
+
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Galería - Como en Casa</title>
+  <meta name="description" content="Recorré nuestros platos y el ambiente en Como en Casa.">
+  <link rel="stylesheet" href="../css/estilos.css">
+</head>
+<body>
+  <header>
+    <nav class="navbar">
+      <div class="brand">Como en Casa</div>
+      <ul>
+        <li><a href="../index.html">Inicio</a></li>
+        <li><a href="./nosotros.html">Nosotros</a></li>
+        <li><a href="./sucursales.html">Sucursales</a></li>
+        <li><a href="./galeria.html">Galería</a></li>
+        <li><a href="./contacto.html">Contacto</a></li>
+      </ul>
+    </nav>
+  </header>
+  <main>
+    <section class="section">
+      <h2>Galería</h2>
+      <div class="carousel" id="galeria">
+        <div class="carousel-track">
+          <div class="carousel-slide"><img src="../images/carne-asada.jpg" alt="Carne asada"></div>
+          <div class="carousel-slide"><img src="../images/Gulash.jpg" alt="Gulash"></div>
+          <div class="carousel-slide"><img src="../images/hamburguesa.jpg" alt="Hamburguesa"></div>
+          <div class="carousel-slide"><img src="../images/salmon.jpg" alt="Salmón"></div>
+          <div class="carousel-slide"><img src="../images/tacos.jpg" alt="Tacos"></div>
+          <div class="carousel-slide"><img src="../images/cafe.jpg" alt="Café"></div>
+        </div>
+        <button class="prev" aria-label="Anterior">&#10094;</button>
+        <button class="next" aria-label="Siguiente">&#10095;</button>
+      </div>
+    </section>
+  </main>
+  <footer>
+    <div class="footer-inner">
+      <small>&copy; 2025 Como en Casa</small>
+      <div class="social">
+        <a href="https://facebook.com" target="_blank" aria-label="Facebook"><img src="../icons/facebook.png" alt="Facebook"></a>
+        <a href="https://twitter.com" target="_blank" aria-label="Twitter"><img src="../icons/twitter.png" alt="Twitter"></a>
+        <a href="https://instagram.com" target="_blank" aria-label="Instagram"><img src="../icons/instagram.png" alt="Instagram"></a>
+      </div>
+    </div>
+  </footer>
+  <script>
+  (function(){
+    const carousel = document.getElementById('galeria');
+    const track = carousel.querySelector('.carousel-track');
+    const slides = Array.from(track.children);
+    const prevBtn = carousel.querySelector('.prev');
+    const nextBtn = carousel.querySelector('.next');
+    let index = 0;
+    function update(){ track.style.transform = `translateX(-${index * 100}%)`; }
+    prevBtn.addEventListener('click', ()=>{ index = (index - 1 + slides.length) % slides.length; update() });
+    nextBtn.addEventListener('click', ()=>{ index = (index + 1) % slides.length; update() });
+    // Swipe en mobile
+    let startX = 0;
+    track.addEventListener('touchstart', e => startX = e.touches[0].clientX);
+    track.addEventListener('touchend', e => {
+      const dx = e.changedTouches[0].clientX - startX;
+      if (dx > 40) { index = (index - 1 + slides.length) % slides.length; update() }
+      if (dx < -40){ index = (index + 1) % slides.length; update() }
+    });
+  })();
+  </script>
+</body>
+</html>
