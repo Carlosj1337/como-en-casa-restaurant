@@ -5,8 +5,23 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Sucursales - Como en Casa</title>
   <meta name="description" content="Encontrá nuestras sucursales cercanas.">
-  <link rel="stylesheet" href="../css/estilos.css">
+  <link rel="stylesheet" href="../css/estilos.css?v=3">
 </head>
+<script>
+(()=> {
+  const btn  = document.querySelector('.nav-toggle');
+  if (!btn) return;
+  const targetId = btn.getAttribute('aria-controls');
+  const menu = document.getElementById(targetId);
+  if (!menu) return;
+
+  btn.addEventListener('click', ()=>{
+    const open = menu.classList.toggle('active');
+    btn.setAttribute('aria-expanded', open);
+  });
+})();
+</script>
+
 <body>
   <header>
     <nav class="navbar">

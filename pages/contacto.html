@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Contacto - Como en Casa</title>
   <meta name="description" content="Contactate con Como en Casa para reservas y consultas.">
-  <link rel="stylesheet" href="../css/estilos.css">
+  <link rel="stylesheet" href="../css/estilos.css?v=4">
 </head>
 <body>
   <header>
@@ -80,28 +80,26 @@
     </div>
   </footer>
 
-  <!-- Toggle del menú (JS liviano) -->
+  <!-- Toggle del menú (JS único) -->
   <script>
-    (function(){
-      const toggle = document.querySelector('.nav-toggle');
-      const menu   = document.querySelector('#primary-menu');
-      if(!toggle || !menu) return;
+  (function(){
+    const toggle = document.querySelector('.nav-toggle');
+    const menu   = document.getElementById('primary-menu');
+    if(!toggle || !menu) return;
 
-      toggle.addEventListener('click', () => {
-        const open = menu.classList.toggle('is-open');
-        toggle.classList.toggle('is-open', open);
-        toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
-      });
+    toggle.addEventListener('click', () => {
+      const open = menu.classList.toggle('active');
+      toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
 
-      // Cerrar al hacer click en un enlace
-      menu.addEventListener('click', (e) => {
-        if(e.target.tagName === 'A'){
-          menu.classList.remove('is-open');
-          toggle.classList.remove('is-open');
-          toggle.setAttribute('aria-expanded','false');
-        }
-      });
-    })();
+    // Cerrar al hacer clic en un enlace (mobile)
+    menu.addEventListener('click', (e) => {
+      if(e.target.tagName === 'A'){
+        menu.classList.remove('active');
+        toggle.setAttribute('aria-expanded','false');
+      }
+    });
+  })();
   </script>
 </body>
 </html>

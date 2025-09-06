@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Galería - Como en Casa</title>
   <meta name="description" content="Recorré nuestros platos y el ambiente en Como en Casa.">
-  <link rel="stylesheet" href="../css/estilos.css">
+  <link rel="stylesheet" href="../css/estilos.css?v=4">
 </head>
 <body>
   <header>
@@ -33,7 +33,7 @@
       <h2>Galería</h2>
       <div class="carousel" id="galeria">
         <div class="carousel-track">
-          <div class="carousel-slide"><img src="../images/Varios.jpg" alt="Carne asada"></div>
+          <div class="carousel-slide"><img src="../images/Varios.jpg" alt="Varios platos"></div>
           <div class="carousel-slide"><img src="../images/Gulash.jpg" alt="Gulash"></div>
           <div class="carousel-slide"><img src="../images/hamburguesa.jpg" alt="Hamburguesa"></div>
           <div class="carousel-slide"><img src="../images/salmon.jpg" alt="Salmón"></div>
@@ -63,40 +63,45 @@
     </div>
   </footer>
 
-  <!-- Script del carrusel + menú -->
+  <!-- Carrusel + toggle del menú (JS único) -->
   <script>
   (function(){
     // Carrusel
     const carousel = document.getElementById('galeria');
-    const track = carousel.querySelector('.carousel-track');
-    const slides = Array.from(track.children);
-    const prevBtn = carousel.querySelector('.prev');
-    const nextBtn = carousel.querySelector('.next');
-    let index = 0;
-    function update(){ track.style.transform = `translateX(-${index * 100}%)`; }
-    prevBtn.addEventListener('click', ()=>{ index = (index - 1 + slides.length) % slides.length; update(); });
-    nextBtn.addEventListener('click', ()=>{ index = (index + 1) % slides.length; update(); });
-    let startX = 0;
-    track.addEventListener('touchstart', e => startX = e.touches[0].clientX);
-    track.addEventListener('touchend', e => {
-      const dx = e.changedTouches[0].clientX - startX;
-      if (dx > 40) { index = (index - 1 + slides.length) % slides.length; update(); }
-      if (dx < -40){ index = (index + 1) % slides.length; update(); }
-    });
+    if (carousel) {
+      const track = carousel.querySelector('.carousel-track');
+      const slides = Array.from(track.children);
+      const prevBtn = carousel.querySelector('.prev');
+      const nextBtn = carousel.querySelector('.next');
+      let index = 0;
+
+      function update(){ track.style.transform = `translateX(-${index * 100}%)`; }
+      prevBtn.addEventListener('click', ()=>{ index = (index - 1 + slides.length) % slides.length; update(); });
+      nextBtn.addEventListener('click', ()=>{ index = (index + 1) % slides.length; update(); });
+
+      // Swipe en mobile
+      let startX = 0;
+      track.addEventListener('touchstart', e => startX = e.touches[0].clientX);
+      track.addEventListener('touchend', e => {
+        const dx = e.changedTouches[0].clientX - startX;
+        if (dx > 40) { index = (index - 1 + slides.length) % slides.length; update(); }
+        if (dx < -40){ index = (index + 1) % slides.length; update(); }
+      });
+    }
 
     // Navbar toggle
     const toggle = document.querySelector('.nav-toggle');
-    const menu   = document.querySelector('#primary-menu');
+    const menu   = document.getElementById('primary-menu');
     if(toggle && menu){
       toggle.addEventListener('click', () => {
-        const open = menu.classList.toggle('is-open');
-        toggle.classList.toggle('is-open', open);
+        const open = menu.classList.toggle('active');  // usar 'active'
         toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
       });
+
+      // Cerrar al hacer click en un enlace
       menu.addEventListener('click', (e) => {
         if(e.target.tagName === 'A'){
-          menu.classList.remove('is-open');
-          toggle.classList.remove('is-open');
+          menu.classList.remove('active');
           toggle.setAttribute('aria-expanded','false');
         }
       });
