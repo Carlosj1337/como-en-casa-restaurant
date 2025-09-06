@@ -1,0 +1,29 @@
+/* scss/responsive.scss */
+@use "variables";
+
+/* --- Responsive general --- */
+@media (max-width: variables.$bp-md) {
+  .grid-two {
+    grid-template-columns: 1fr;
+  }
+
+  .navbar ul {
+    flex-wrap: wrap;
+    gap: .5rem;
+  }
+
+  .footer-inner {
+    flex-direction: column;
+    gap: 1rem;
+    text-align: center;
+  }
+
+  /* Ajustes adicionales si hacen falta en mobile */
+  .btn {
+    width: auto;
+  }
+
+  .card__body {
+    padding: .875rem;
+  }
+}

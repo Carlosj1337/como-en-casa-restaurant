@@ -1,0 +1,91 @@
+/* scss/componentes.scss */
+@use "sass:color";
+@use "variables";
+
+/* ---------- Botones ---------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: .5rem;
+  padding: .65rem 1rem;
+  border-radius: .6rem;
+  border: 0;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background-color .2s ease, box-shadow .2s ease, transform .04s ease;
+  box-shadow: 0 2px 6px rgba(0,0,0,.06);
+}
+
+.btn:active { transform: translateY(1px); }
+
+/* variantes */
+.btn--primary {
+  background: variables.$terracotta;
+  color: #fff;
+
+  &:hover         { background: color.adjust(variables.$terracotta, $lightness: -8%); }
+  &:focus-visible { outline: 2px solid color.adjust(variables.$terracotta, $lightness: -20%); outline-offset: 2px; }
+}
+
+.btn--secondary {
+  background: variables.$wine;
+  color: #fff;
+
+  &:hover         { background: color.adjust(variables.$wine, $lightness: -8%); }
+  &:focus-visible { outline: 2px solid color.adjust(variables.$wine, $lightness: -20%); outline-offset: 2px; }
+}
+
+.btn--light {
+  background: #fff;
+  color: variables.$ink;
+  border: 1px solid rgba(0,0,0,.08);
+
+  &:hover { background: color.adjust(#fff, $lightness: -6%); }
+}
+
+/* ---------- Chips / Badges ---------- */
+.badge {
+  display: inline-block;
+  padding: .25rem .5rem;
+  border-radius: 999px;
+  font-size: .75rem;
+  line-height: 1;
+  border: 1px solid rgba(0,0,0,.08);
+  background: #fff;
+  color: variables.$ink;
+}
+
+.badge--accent {
+  background: variables.$mustard;
+  color: #2b2b2b;
+  border-color: transparent;
+}
+
+/* ---------- Cards ---------- */
+.card {
+  background: #fff;
+  border-radius: 1rem;
+  box-shadow: 0 6px 16px rgba(0,0,0,.08);
+  overflow: hidden;
+}
+
+.card__media img { display:block; width:100%; height:auto; }
+.card__body  { padding: 1rem; }
+.card__title { margin: 0 0 .25rem; font-size: 1.1rem; font-weight: 700; }
+.card__text  { margin: 0; color: rgba(variables.$ink, .85); }
+
+/* ---------- Utilidades ---------- */
+.u-center      { display:flex; align-items:center; justify-content:center; }
+.u-text-center { text-align:center; }
+.u-mb-0 { margin-bottom: 0 !important; }
+.u-mb-1 { margin-bottom: .25rem !important; }
+.u-mb-2 { margin-bottom: .5rem  !important; }
+.u-mb-3 { margin-bottom: 1rem   !important; }
+
+/* ---------- Responsive ---------- */
+@media (max-width: variables.$bp-md) {
+  .btn { width: auto; }
+  .card__body { padding: .875rem; }
+}

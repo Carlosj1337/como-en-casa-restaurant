@@ -1,4 +1,3 @@
-
 <!doctype html>
 <html lang="es">
 <head>
@@ -12,7 +11,14 @@
   <header>
     <nav class="navbar">
       <div class="brand">Como en Casa</div>
-      <ul>
+
+      <!-- Botón hamburguesa (mobile) -->
+      <button class="nav-toggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="primary-menu">
+        <span class="bar"></span><span class="bar"></span><span class="bar"></span>
+      </button>
+
+      <!-- Menú principal -->
+      <ul id="primary-menu" class="nav-menu">
         <li><a href="../index.html">Inicio</a></li>
         <li><a href="./nosotros.html">Nosotros</a></li>
         <li><a href="./sucursales.html">Sucursales</a></li>
@@ -21,41 +27,81 @@
       </ul>
     </nav>
   </header>
+
   <main>
-    <section class="section contact-card">
+    <section class="section section--xl">
       <h2>Contacto</h2>
-      <div class="contact-ways">
+
+      <!-- Vías de contacto -->
+      <div class="contact-ways" aria-label="Vías de contacto">
         <img src="../icons/whatsapp.png" alt="WhatsApp">
-        <a href="https://wa.me/5491112345678" target="_blank">+54 9 11 1234-5678</a>
-        <span> | </span>
+        <a href="https://wa.me/5491112345678" target="_blank" rel="noopener noreferrer">+54 9 11 1234-5678</a>
+        <span aria-hidden="true"> | </span>
         <a href="tel:+542215345678">Tel: +54 221 534-5678</a>
       </div>
-      <form action="#" method="post">
+
+      <!-- Formulario -->
+      <form class="contact-card contact-card--wide" action="#" method="post" novalidate>
         <label for="nombre">Nombre</label>
-        <input id="nombre" name="nombre" required>
+        <input id="nombre" name="nombre" type="text" autocomplete="name" required>
+
         <label for="email">Email</label>
-        <input id="email" type="email" name="email" required>
+        <input id="email" name="email" type="email" autocomplete="email" required>
+
         <label for="sucursal">Sucursal</label>
         <select id="sucursal" name="sucursal">
-          <option>La Plata</option>
-          <option>Berisso</option>
-          <option>Ensenada</option>
+          <option value="la-plata">La Plata</option>
+          <option value="berisso">Berisso</option>
+          <option value="ensenada">Ensenada</option>
         </select>
+
         <label for="mensaje">Mensaje</label>
         <textarea id="mensaje" name="mensaje" rows="5" required></textarea>
+
         <button type="submit">Enviar</button>
       </form>
     </section>
   </main>
+
   <footer>
     <div class="footer-inner">
       <small>&copy; 2025 Como en Casa</small>
       <div class="social">
-        <a href="https://facebook.com" target="_blank" aria-label="Facebook"><img src="../icons/facebook.png" alt="Facebook"></a>
-        <a href="https://twitter.com" target="_blank" aria-label="Twitter"><img src="../icons/twitter.png" alt="Twitter"></a>
-        <a href="https://instagram.com" target="_blank" aria-label="Instagram"><img src="../icons/instagram.png" alt="Instagram"></a>
+        <a href="https://facebook.com" target="_blank" aria-label="Facebook" rel="noopener noreferrer">
+          <img src="../icons/facebook.svg" alt="Facebook">
+        </a>
+        <a href="https://twitter.com" target="_blank" aria-label="Twitter" rel="noopener noreferrer">
+          <img src="../icons/twitter.svg" alt="Twitter">
+        </a>
+        <a href="https://instagram.com" target="_blank" aria-label="Instagram" rel="noopener noreferrer">
+          <img src="../icons/instagram.png" alt="Instagram">
+        </a>
       </div>
     </div>
   </footer>
+
+  <!-- Toggle del menú (JS liviano) -->
+  <script>
+    (function(){
+      const toggle = document.querySelector('.nav-toggle');
+      const menu   = document.querySelector('#primary-menu');
+      if(!toggle || !menu) return;
+
+      toggle.addEventListener('click', () => {
+        const open = menu.classList.toggle('is-open');
+        toggle.classList.toggle('is-open', open);
+        toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+      });
+
+      // Cerrar al hacer click en un enlace
+      menu.addEventListener('click', (e) => {
+        if(e.target.tagName === 'A'){
+          menu.classList.remove('is-open');
+          toggle.classList.remove('is-open');
+          toggle.setAttribute('aria-expanded','false');
+        }
+      });
+    })();
+  </script>
 </body>
 </html>

@@ -1,4 +1,3 @@
-
 <!doctype html>
 <html lang="es">
 <head>
@@ -12,7 +11,14 @@
   <header>
     <nav class="navbar">
       <div class="brand">Como en Casa</div>
-      <ul>
+
+      <!-- Botón hamburguesa (mobile) -->
+      <button class="nav-toggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="primary-menu">
+        <span class="bar"></span><span class="bar"></span><span class="bar"></span>
+      </button>
+
+      <!-- Menú principal -->
+      <ul id="primary-menu" class="nav-menu">
         <li><a href="../index.html">Inicio</a></li>
         <li><a href="./nosotros.html">Nosotros</a></li>
         <li><a href="./sucursales.html">Sucursales</a></li>
@@ -21,12 +27,13 @@
       </ul>
     </nav>
   </header>
+
   <main>
-    <section class="section">
+    <section class="section section--xl">
       <h2>Galería</h2>
       <div class="carousel" id="galeria">
         <div class="carousel-track">
-          <div class="carousel-slide"><img src="../images/carne-asada.jpg" alt="Carne asada"></div>
+          <div class="carousel-slide"><img src="../images/Varios.jpg" alt="Carne asada"></div>
           <div class="carousel-slide"><img src="../images/Gulash.jpg" alt="Gulash"></div>
           <div class="carousel-slide"><img src="../images/hamburguesa.jpg" alt="Hamburguesa"></div>
           <div class="carousel-slide"><img src="../images/salmon.jpg" alt="Salmón"></div>
@@ -38,18 +45,28 @@
       </div>
     </section>
   </main>
+
   <footer>
     <div class="footer-inner">
       <small>&copy; 2025 Como en Casa</small>
       <div class="social">
-        <a href="https://facebook.com" target="_blank" aria-label="Facebook"><img src="../icons/facebook.png" alt="Facebook"></a>
-        <a href="https://twitter.com" target="_blank" aria-label="Twitter"><img src="../icons/twitter.png" alt="Twitter"></a>
-        <a href="https://instagram.com" target="_blank" aria-label="Instagram"><img src="../icons/instagram.png" alt="Instagram"></a>
+        <a href="https://facebook.com" target="_blank" aria-label="Facebook" rel="noopener noreferrer">
+          <img src="../icons/facebook.svg" alt="Facebook">
+        </a>
+        <a href="https://twitter.com" target="_blank" aria-label="Twitter" rel="noopener noreferrer">
+          <img src="../icons/twitter.svg" alt="Twitter">
+        </a>
+        <a href="https://instagram.com" target="_blank" aria-label="Instagram" rel="noopener noreferrer">
+          <img src="../icons/instagram.png" alt="Instagram">
+        </a>
       </div>
     </div>
   </footer>
+
+  <!-- Script del carrusel + menú -->
   <script>
   (function(){
+    // Carrusel
     const carousel = document.getElementById('galeria');
     const track = carousel.querySelector('.carousel-track');
     const slides = Array.from(track.children);
@@ -57,16 +74,33 @@
     const nextBtn = carousel.querySelector('.next');
     let index = 0;
     function update(){ track.style.transform = `translateX(-${index * 100}%)`; }
-    prevBtn.addEventListener('click', ()=>{ index = (index - 1 + slides.length) % slides.length; update() });
-    nextBtn.addEventListener('click', ()=>{ index = (index + 1) % slides.length; update() });
-    // Swipe en mobile
+    prevBtn.addEventListener('click', ()=>{ index = (index - 1 + slides.length) % slides.length; update(); });
+    nextBtn.addEventListener('click', ()=>{ index = (index + 1) % slides.length; update(); });
     let startX = 0;
     track.addEventListener('touchstart', e => startX = e.touches[0].clientX);
     track.addEventListener('touchend', e => {
       const dx = e.changedTouches[0].clientX - startX;
-      if (dx > 40) { index = (index - 1 + slides.length) % slides.length; update() }
-      if (dx < -40){ index = (index + 1) % slides.length; update() }
+      if (dx > 40) { index = (index - 1 + slides.length) % slides.length; update(); }
+      if (dx < -40){ index = (index + 1) % slides.length; update(); }
     });
+
+    // Navbar toggle
+    const toggle = document.querySelector('.nav-toggle');
+    const menu   = document.querySelector('#primary-menu');
+    if(toggle && menu){
+      toggle.addEventListener('click', () => {
+        const open = menu.classList.toggle('is-open');
+        toggle.classList.toggle('is-open', open);
+        toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+      });
+      menu.addEventListener('click', (e) => {
+        if(e.target.tagName === 'A'){
+          menu.classList.remove('is-open');
+          toggle.classList.remove('is-open');
+          toggle.setAttribute('aria-expanded','false');
+        }
+      });
+    }
   })();
   </script>
 </body>

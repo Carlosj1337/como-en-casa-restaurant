@@ -1,4 +1,3 @@
-
 <!doctype html>
 <html lang="es">
 <head>
@@ -6,13 +5,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Como en Casa</title>
   <meta name="description" content="Restaurante Como en Casa - sabores caseros con un toque moderno.">
-  <link rel="stylesheet" href="css/estilos.css">
+  <link rel="stylesheet" href="css/estilos.css?v=999">
 </head>
 <body>
   <header>
     <nav class="navbar">
       <div class="brand">Como en Casa</div>
-      <ul>
+
+      <!-- Botón hamburguesa (mobile) -->
+      <button class="nav-toggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="primary-menu">
+        <span class="bar"></span><span class="bar"></span><span class="bar"></span>
+      </button>
+
+      <!-- Menú principal -->
+      <ul id="primary-menu" class="nav-menu">
         <li><a href="index.html">Inicio</a></li>
         <li><a href="pages/nosotros.html">Nosotros</a></li>
         <li><a href="pages/sucursales.html">Sucursales</a></li>
@@ -21,24 +27,50 @@
       </ul>
     </nav>
   </header>
+
   <main>
     <section class="hero">
-      <img src="images/fachada.jpg" alt="Fachada del local - Como en Casa">
+      <img src="images/Fachada.jpg" alt="Fachada del local - Como en Casa">
       <div class="overlay"><h1>Bienvenidos a Como en Casa</h1></div>
     </section>
     <section class="section">
       <p>Disfrutá de cocina casera con un toque moderno. Reservas y pedidos todos los días.</p>
     </section>
   </main>
+
   <footer>
     <div class="footer-inner">
       <small>&copy; 2025 Como en Casa</small>
       <div class="social">
-        <a href="https://facebook.com" target="_blank" aria-label="Facebook"><img src="icons/facebook.png" alt="Facebook"></a>
-        <a href="https://twitter.com" target="_blank" aria-label="Twitter"><img src="icons/twitter.png" alt="Twitter"></a>
+        <a href="https://facebook.com" target="_blank" aria-label="Facebook"><img src="icons/facebook.svg" alt="Facebook"></a>
+        <a href="https://twitter.com" target="_blank" aria-label="Twitter"><img src="icons/twitter.svg" alt="Twitter"></a>
         <a href="https://instagram.com" target="_blank" aria-label="Instagram"><img src="icons/instagram.png" alt="Instagram"></a>
       </div>
     </div>
   </footer>
+
+  <!-- Toggle del menú (JS liviano) -->
+  <script>
+    (function(){
+      const toggle = document.querySelector('.nav-toggle');
+      const menu   = document.querySelector('#primary-menu');
+      if(!toggle || !menu) return;
+
+      toggle.addEventListener('click', () => {
+        const open = menu.classList.toggle('is-open');
+        toggle.classList.toggle('is-open', open);
+        toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+      });
+
+      // Cerrar al hacer click en un link del menú
+      menu.addEventListener('click', (e) => {
+        if(e.target.tagName === 'A'){
+          menu.classList.remove('is-open');
+          toggle.classList.remove('is-open');
+          toggle.setAttribute('aria-expanded','false');
+        }
+      });
+    })();
+  </script>
 </body>
 </html>

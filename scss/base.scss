@@ -1,0 +1,41 @@
+/* RESET BÁSICO */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  height: 100%;
+}
+
+/* BODY GENERAL */
+body {
+  font-family: $font-base;
+  color: $ink;
+  background: $cream;
+
+  /* Footer fijo al fondo */
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* MAIN */
+main {
+  position: relative;
+  z-index: 1;
+  max-width: 1200px;
+  margin: 1.5rem auto;
+  padding: 0 1rem;
+  flex: 1; /* ocupa todo el espacio libre */
+}
+
+/* SECCIONES */
+.section {
+  background: #fff;
+  border-radius: 1rem;
+  padding: 1rem;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+  margin: 1.25rem 0;
+}

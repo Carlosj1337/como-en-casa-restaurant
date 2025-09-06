@@ -1,4 +1,3 @@
-
 <!doctype html>
 <html lang="es">
 <head>
@@ -12,7 +11,14 @@
   <header>
     <nav class="navbar">
       <div class="brand">Como en Casa</div>
-      <ul>
+
+      <!-- Botón hamburguesa (mobile) -->
+      <button class="nav-toggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="primary-menu">
+        <span class="bar"></span><span class="bar"></span><span class="bar"></span>
+      </button>
+
+      <!-- Menú principal -->
+      <ul id="primary-menu" class="nav-menu">
         <li><a href="../index.html">Inicio</a></li>
         <li><a href="./nosotros.html">Nosotros</a></li>
         <li><a href="./sucursales.html">Sucursales</a></li>
@@ -21,25 +27,59 @@
       </ul>
     </nav>
   </header>
+
   <main>
-    <section class="section">
+    <section class="section section--xl">
       <h2>Nuestras Sucursales</h2>
-      <ul>
-        <li>La Plata - Calle 12 #456</li>
-        <li>Berisso - Av. Montevideo 2020</li>
-        <li>Ensenada - Calle Ortiz de Rosas 88</li>
-      </ul>
+      <div class="branches">
+        <article class="branch">
+          <h3>La Plata</h3>
+          <p>Calle 12 #456</p>
+        </article>
+        <article class="branch">
+          <h3>Berisso</h3>
+          <p>Av. Montevideo 2020</p>
+        </article>
+        <article class="branch">
+          <h3>Ensenada</h3>
+          <p>Calle Ortiz de Rosas 88</p>
+        </article>
+      </div>
     </section>
   </main>
+
   <footer>
     <div class="footer-inner">
       <small>&copy; 2025 Como en Casa</small>
       <div class="social">
-        <a href="https://facebook.com" target="_blank" aria-label="Facebook"><img src="../icons/facebook.png" alt="Facebook"></a>
-        <a href="https://twitter.com" target="_blank" aria-label="Twitter"><img src="../icons/twitter.png" alt="Twitter"></a>
+        <a href="https://facebook.com" target="_blank" aria-label="Facebook"><img src="../icons/facebook.svg" alt="Facebook"></a>
+        <a href="https://twitter.com" target="_blank" aria-label="Twitter"><img src="../icons/twitter.svg" alt="Twitter"></a>
         <a href="https://instagram.com" target="_blank" aria-label="Instagram"><img src="../icons/instagram.png" alt="Instagram"></a>
       </div>
     </div>
   </footer>
+
+  <!-- Toggle del menú (JS liviano) -->
+  <script>
+    (function(){
+      const toggle = document.querySelector('.nav-toggle');
+      const menu   = document.querySelector('#primary-menu');
+      if(!toggle || !menu) return;
+
+      toggle.addEventListener('click', () => {
+        const open = menu.classList.toggle('is-open');
+        toggle.classList.toggle('is-open', open);
+        toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+      });
+
+      menu.addEventListener('click', (e) => {
+        if(e.target.tagName === 'A'){
+          menu.classList.remove('is-open');
+          toggle.classList.remove('is-open');
+          toggle.setAttribute('aria-expanded','false');
+        }
+      });
+    })();
+  </script>
 </body>
 </html>

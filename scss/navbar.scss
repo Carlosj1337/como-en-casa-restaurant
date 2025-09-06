@@ -1,0 +1,48 @@
+/* --- NAV responsive --- */
+.nav-toggle{
+  display:none; /* oculto en desktop */
+  background:transparent;
+  border:0;
+  cursor:pointer;
+  padding:.4rem;
+  margin-left:auto;
+}
+
+.nav-toggle .bar{
+  display:block;
+  width:26px; height:3px;
+  background:#fff;
+  border-radius:2px;
+  margin:5px 0;
+  transition:transform .25s ease, opacity .25s ease;
+}
+
+/* estado “abierto”: animación */
+.nav-toggle.is-open .bar:nth-child(1){ transform: translateY(8px) rotate(45deg); }
+.nav-toggle.is-open .bar:nth-child(2){ opacity:0; }
+.nav-toggle.is-open .bar:nth-child(3){ transform: translateY(-8px) rotate(-45deg); }
+
+/* Menú base (desktop) */
+.nav-menu{ display:flex; gap:1rem; }
+
+/* Breakpoint móvil */
+@media (max-width:800px){
+  .nav-toggle{ display:block; } /* mostrar botón solo en móvil */
+  
+  .nav-menu{
+    position: absolute;
+    top: 100%; right: 0; left: 0;
+    background: linear-gradient(90deg, $terracotta, $wine);
+    display: grid; gap:.25rem;
+    padding:.5rem 1rem;
+    border-radius: 0 0 .75rem .75rem;
+    box-shadow: 0 8px 20px rgba(0,0,0,.15);
+    max-height: 0; overflow: hidden;
+    transition: max-height .3s ease;
+  }
+
+  .nav-menu a{ padding:.6rem .75rem; }
+  .nav-menu.is-open{ max-height: 300px; }
+
+  .navbar{ position: relative; }
+}
